@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'styles/inventory.css' %}">
+{% endblock %} 
+
+{% block content %} 
+<section class="inventory">
+	<h1 class="inventory-section-title">INVENTORY</h1>
+	
+	<hr>
+
+	<ul class="ingredients-list">
+		<li class="ingredient">Jameson Whisky</li>
+		<li class="ingredient">Lemon Juice</li>
+		<li class="ingredient">Coca Cola</li>
+	</ul>
+</section>
+{% endblock %}

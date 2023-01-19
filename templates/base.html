@@ -6,12 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Djangstaurant</title>
-	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/base.css' %}">
+	{% block head %}{% endblock %} 
 </head>
 <body>
 	{% include 'navbar.html' %} 
 
-	{% block content %}
-	{% endblock %}
+	<div class="content">
+		{% block content %}
+		{% endblock %}
+	</div>
 </body>
 </html>

@@ -1,1 +1,14 @@
-<h1>NAVBAR</h1>
+{% load static %}
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+{% endblock %}
+
+<div class="navbar">
+	<ul class="nav-links">
+		<li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+		<li><a class="nav-link">Menu</a></li>
+		<li><a class="nav-link" href="{% url 'inventory' %}">Inventory</a></li>
+		<li><a class="nav-link">Purchases</a></li>
+	</ul>
+</div>
