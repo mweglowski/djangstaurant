@@ -7,6 +7,16 @@
 <ul class="ingredients-list">
 	{% for ingredient in ingredients %} 
 		<li class="ingredient">
+
+			<!-- BADGES BASED ON UNIT TYPE -->
+			{% if ingredient.unit == "ml" %} 
+				<div class="ingredient-badge ml-badge"></div>
+			{% elif ingredient.unit == "g" %}
+				<div class="ingredient-badge g-badge"></div>
+			{% else %}
+				<div class="ingredient-badge piece-badge"></div>
+			{% endif %}
+
 			<div class="ingredient-name">{{ ingredient.name }}</div>
 			<div class="ingredient-amount">
 				{{ ingredient.amount }}

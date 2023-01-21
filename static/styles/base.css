@@ -10,8 +10,13 @@ button {
 	border-radius: 8px;
 	cursor: pointer;
 }
+a {
+	text-decoration: none;
+}
 
 .content {
+	display: flex;
+	flex-direction: column;
 	max-width: 1000px;
 	margin: auto;
 }

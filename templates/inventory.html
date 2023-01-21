@@ -13,7 +13,7 @@
 
 	{% include "ingredient_list.html" %}
 	
-	<a class="add-ingredient-button">Add New Ingredient</a>
+	<a href="{% url 'ingredientcreate' %}" class="add-ingredient-button">Add New Ingredient</a>
 
 </section>
 {% endblock %}

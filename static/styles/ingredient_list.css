@@ -1,26 +1,49 @@
 .ingredients-list {
 	padding: .3em;
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
 	width: 80%;
 	max-width: 80%;
-	max-height: 200px;
+	max-height: 540px;
 	margin: 1em auto;
 	overflow: auto;
 }
 
 .ingredient {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	padding: 1em;
+	margin-bottom: 10px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0 0 .3em rgb(205, 205, 205);
 	border-radius: 8px;
 	list-style: none;
 	font-size: 1.2em;
+	overflow: hidden;
 }
 
 .ingredient-amount {
 	color: gray;
+}
+
+.ingredient-badge {
+	content: "";
+	position: absolute;
+	top: -15px;
+	left: -15px;
+	width: 30px;
+	height: 30px;
+	border-radius: 20px;
+}
+/* BADGES BASED ON UNIT TYPE */
+.ml-badge {
+	background-color: rgb(79, 79, 248);
+	box-shadow: 0 0 .3em rgb(79, 79, 248);
+}
+.g-badge {
+	background-color: rgb(255, 123, 0);
+	box-shadow: 0 0 .3em rgb(255, 123, 0);
+}
+.piece-badge {
+	background-color: rgb(43, 200, 135);
+	box-shadow: 0 0 .3em rgb(43, 200, 135);
 }

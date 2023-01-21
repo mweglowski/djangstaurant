@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
+from django.views.generic import TemplateView, CreateView
+from .forms import IngredientCreateForm
 from .models import Ingredient
 
-# Create your views here.
+# /home
 class HomeView(TemplateView):
 	template_name = "home.html"
 
+# /inventory
 def inventory(request):
 	ingredients = Ingredient.objects.all()
 
@@ -27,5 +29,11 @@ def inventory(request):
 	context = {}
 	context["ingredients"] = transformed_ings
 	return render(request, "inventory.html", context)
+
+
+class IngredientCreateView(CreateView):
+	model = Ingredient
+	form_class = IngredientCreateForm 
+	template_name = "ingredient_create_form.html"
 
 	

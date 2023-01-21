@@ -1,0 +1,60 @@
+.ingredient-create-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 500px;
+	width: 100%;
+	margin: auto;
+}
+
+.ingredient-create-form-input-group {
+	width: 80%;
+	margin: auto;
+	padding: 1em;
+}
+.ingredient-create-form-input-group label:first-child {
+	color: rgb(47, 47, 47);
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.ingredient-create-form input[type="text"], .ingredient-create-form input[type="number"] {
+	width: 100%;
+	padding: .5em;
+	box-shadow: 0 0 .4em rgb(174, 174, 174);
+	border-radius: 5px;
+	border: none;
+	border-bottom: 2px solid transparent;
+	font-size: 1.1em;
+	transition: .3s;
+}
+.ingredient-create-form input[type="text"]:focus, .ingredient-create-form input[type="number"]:focus {
+	box-shadow: 0 0 .1em #ff5050;
+	border-bottom: 2px solid #ff5050ca;
+	outline: none;
+}
+
+.ingredient-create-form input[type="radio"], .ingredient-create-form label {
+	cursor: pointer;
+}
+
+.ingredient-create-form input[type="submit"] {
+	width: fit-content;
+	padding: .6em 3em;
+	margin: 2em auto;
+	background-color: #ff5050;
+	box-shadow: 0 0 .7em #ff5050;
+	border: 2px solid transparent;
+	color: white;
+	border-radius: 8px;
+	font-weight: bold;
+	font-size: 1em;
+	transition: .3s;
+}
+
+.ingredient-create-form input[type="submit"]:hover {
+	background-color: transparent;
+	border: 2px solid #ff5050;
+	color: #ff5050;
+	cursor: pointer;
+}
