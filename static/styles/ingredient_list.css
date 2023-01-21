@@ -1,0 +1,26 @@
+.ingredients-list {
+	padding: .3em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	width: 80%;
+	max-width: 80%;
+	max-height: 200px;
+	margin: 1em auto;
+	overflow: auto;
+}
+
+.ingredient {
+	display: flex;
+	justify-content: space-between;
+	padding: 1em;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0 0 .3em rgb(205, 205, 205);
+	border-radius: 8px;
+	list-style: none;
+	font-size: 1.2em;
+}
+
+.ingredient-amount {
+	color: gray;
+}

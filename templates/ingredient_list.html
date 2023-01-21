@@ -1,0 +1,23 @@
+{% load static %}
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'styles/ingredient_list.css' %}">
+{% endblock %} 
+
+<ul class="ingredients-list">
+	{% for ingredient in ingredients %} 
+		<li class="ingredient">
+			<div class="ingredient-name">{{ ingredient.name }}</div>
+			<div class="ingredient-amount">
+				{{ ingredient.amount }}
+				{% if ingredient.unit == "ml" %}
+				ml
+				{% elif ingredient.unit == "g" %} 
+				g
+				{% else %} 
+				pieces
+				{% endif %}
+			</div>
+		</li>
+	{% endfor %}
+</ul>

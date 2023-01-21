@@ -6,8 +6,26 @@
 	box-sizing: border-box;
 	font-family: "Work Sans", sans-serif;
 }
+button {
+	border-radius: 8px;
+	cursor: pointer;
+}
 
 .content {
 	max-width: 1000px;
 	margin: auto;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dedede;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-track {
+	background: #efefef;
+	border-radius: 15px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
 }
