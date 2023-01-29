@@ -1,0 +1,50 @@
+.menu-item-list {
+	display: flex;
+	flex-direction: column;
+	margin-top: 2em;
+}
+
+.menu-item {
+	position: relative;
+	width: 90%;
+	box-shadow: 0 0 .3em gray;
+	border-radius: 8px;
+	padding: 1em;
+	margin: .5em auto;
+}
+
+.menu-item-ingredient-list {
+	margin-top: .5em;
+	color: gray;
+}
+
+.menu-item-name {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.menu-item-price {
+	position: absolute;
+	top: .5em;
+	right: .5em;
+	font-size: 1.2em;
+}
+
+.menu-item-purchase-btn {
+	position: absolute;
+	right: .5em;
+	bottom: .5em;
+	padding: .4em 1em;
+	background-color: transparent;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	font-size: .9em;
+	font-weight: bold;
+	color: #ff5050;
+	transition: .4s;
+}
+.menu-item-purchase-btn:hover {
+	border: 2px solid #ff5050;
+	transform: translateY(-5px);
+	cursor: pointer;
+}

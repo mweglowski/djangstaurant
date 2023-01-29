@@ -9,5 +9,16 @@
 <section class="menu-section">
   <h1 class="section-title">MENU</h1>
 	<hr />
+
+	<div class="menu-item-list">
+		{% for menu_item in menu_items %} 
+			<div class="menu-item">
+				<div class="menu-item-name">{{ menu_item.name }}</div>
+				<div class="menu-item-ingredient-list">ingredients list</div>
+				<div class="menu-item-price">{{ menu_item.price }}$</div>
+				<a class="menu-item-purchase-btn">PURCHASE</a>
+			</div>
+		{% endfor %}
+	</div>
 </section>
 {% endblock %}

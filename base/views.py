@@ -1,15 +1,27 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView
 from .forms import IngredientAddForm
-from .models import Ingredient
+from .models import Ingredient, MenuItem
 
 # /home
 class HomeView(TemplateView):
 	template_name = "home.html"
 
 # /menu
-class MenuView(TemplateView):
-	template_name = "menu/menu.html"
+def menu(request):
+	menu_items = MenuItem.objects.all()
+	context = {}
+	context["menu_items"] = menu_items
+	# context["menu_items"] = []
+	# for item in menu_items:
+	# 	context["menu_items"].append({
+	# 		"id": item.id,
+	# 		"name": item.name,
+	# 		"price": item.price
+	# 	})
+
+	return render(request, "menu/menu.html", context)
+
 
 # /inventory
 def inventory(request):
@@ -40,4 +52,5 @@ class IngredientAddView(CreateView):
 	model = Ingredient
 	form_class = IngredientAddForm 
 	template_name = "add_ingredient/add_ingredient.html"
+
 
