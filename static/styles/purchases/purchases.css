@@ -1,0 +1,38 @@
+.purchases-list {
+	display: flex;
+	flex-direction: column;
+	padding: 2em;
+	margin: 2em;
+	gap: .5em;
+}
+
+.purchase {
+	display: flex;
+	gap: .25em;
+}
+.purchase div {
+	padding: 1.5em;
+	font-size: 1.1em;
+	color: gray;
+	box-shadow: 0 0 .3em #c2c2c2;
+}
+
+.purchase-date {
+	flex: 2;
+	border-radius: 10px 0 0 10px;
+	color: gray;
+	text-align: center;
+}
+
+.purchase-item-name {
+	flex: 5;
+	font-weight: bold;
+	color: gray;
+}
+
+.purchase-price {
+	flex: 1;
+	box-shadow: 0 0 .5em #db8e8e;
+	border-radius: 0 10px 10px 0;
+	text-align: center;
+}

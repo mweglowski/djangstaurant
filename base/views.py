@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, CreateView
-from .forms import IngredientAddForm, NewPurchaseForm
-from .models import Ingredient, MenuItem, MenuItemRequirement
+from django.views.generic import TemplateView
+from .forms import IngredientAddForm, NewPurchaseForm, MenuItemAddForm
+from .models import Ingredient, MenuItem, MenuItemRequirement, Purchase
 
 # /home
 class HomeView(TemplateView):
@@ -21,6 +21,29 @@ def menu(request):
 	# 	})
 
 	return render(request, "menu/menu.html", context)
+
+# /menu/new-item
+def new_menu_item(request):
+	if request.method == "POST":
+		form = MenuItemAddForm(request.POST)
+
+		name = form["name"].value()
+		price = float(form["price"].value())
+		food_type = form["food_type"].value()
+		menu_item = MenuItem(name=name, price=price, food_type=food_type)
+		menu_item.save()
+		
+		return redirect(f"/menu/new-item/add-ingredient", {"item_id": menu_item.id})
+
+	return render(request, "menu/new_menu_item.html")
+
+
+# /menu/new-item/add-ingredient
+def new_menu_item_add_ingredient(request):
+	# CHECKING REQUEST METHOD AS USUAL
+	
+
+	return render(request, "menu/new_menu_item_add_ingredient.html")
 
 
 # /inventory
@@ -48,10 +71,47 @@ def inventory(request):
 
 
 # /ingredient/add
-class IngredientAddView(CreateView):
-	model = Ingredient
-	form_class = IngredientAddForm 
-	template_name = "add_ingredient/add_ingredient.html"
+# class IngredientAddView(CreateView):
+# 	model = Ingredient
+# 	form_class = IngredientAddForm 
+# 	template_name = "add_ingredient/add_ingredient.html"
+
+# /ingredient/add
+def ingredient_add_view(request):
+	if request.method == "POST":
+		form = IngredientAddForm(request.POST)
+		name = form["name"].value()
+		unit = form["unit"].value()
+		amount = form["amount"].value()
+		new_ingredient = Ingredient(name=name, unit=unit, amount=amount)
+		new_ingredient.save()
+
+		return redirect('inventory')
+
+	return render(request, "add_ingredient/add_ingredient.html")
+
+# /purchases
+def purchases_view(request):
+	purchases = Purchase.objects.all()
+	purchases_transformed = []
+	for purchase in purchases:
+		# GET MENU ITEM 
+		menu_item = purchase.menu_item_id
+		# GET MENU ITEM NAME
+		menu_item_name = menu_item.name
+		# GET PRICE OF MENU ITEM
+		menu_item_price = menu_item.price
+		# GET DATE OF PURCHASE
+		menu_item_purchase_date = purchase.date
+
+		# APPEND NEW PURCHASE OBJECT TO TRANSFORMED PURCHASES
+		purchases_transformed.append({
+			"item_name": menu_item_name,
+			"price": menu_item_price,
+			"date": menu_item_purchase_date
+		})
+
+	return render(request, "purchases/purchases.html", {"purchases": purchases_transformed})
 
 
 # /new-purchase
@@ -82,8 +142,11 @@ def new_purchase(request, menu_item_id):
 		
 		ingredient_in_storage.save()
 
-		return redirect('menu')
+		# CREATING NEW PURCHASE
+		another_purchase = Purchase(menu_item_id=item)
+		another_purchase.save()
+		print(another_purchase)
 
-	
+		return redirect('menu')
 
 	return render(request, "purchases/new_purchase.html", context)

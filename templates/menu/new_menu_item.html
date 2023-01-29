@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/menu/new_menu_item.css' %}"> 
+{% endblock %}
+
+{% block content %}
+<section class="new-menu-item">
+	<h1 class="section-title">New Menu Item</h1>
+	<hr />
+
+	{% include "menu/new_menu_item_form.html" %}
+</section>
+{% endblock %}

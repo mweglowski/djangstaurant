@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'styles/purchases/purchases.css' %}">
+{% endblock %} 
+
+{% block content %}
+<section class="purchases-section">
+	<h1 class="section-title">PURCHASES</h1>
+	<hr />
+
+	<div class="purchases-list">
+		{% for purchase in purchases %} 
+			<div class="purchase">
+				<div class="purchase-date">{{ purchase.date }}</div>
+				<div class="purchase-item-name">{{ purchase.item_name }}</div>
+				<div class="purchase-price">{{ purchase.price }}$</div>
+			</div>
+		{% endfor %}
+	</div>
+</section> 
+{% endblock %}

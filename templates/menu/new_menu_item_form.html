@@ -1,0 +1,33 @@
+{% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'styles/menu/new_menu_item_form.css' %}"
+/>
+{% endblock %}
+
+<form class="form" action="" method="POST">
+  {% csrf_token %}
+  <div class="form-input-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" maxlength="100" required />
+  </div>
+
+  <div class="form-input-group">
+    <label>Food Type</label>
+    <div class="form-radio-box">
+      <input type="radio" id="cocktail" name="food_type" max="10" value="cocktail" />
+      <label for="cocktail">Cocktail</label>
+    </div>
+    <div class="form-radio-box">
+      <input type="radio" id="dessert" name="food_type" max="10" value="dessert" />
+      <label for="dessert">Dessert</label>
+    </div>
+  </div>
+
+  <div class="form-input-group">
+    <label for="price">Price</label>
+    <input type="number" id="price" name="price" step="1" required />
+  </div>
+
+  <input class="button" type="submit" value="Add Some Ingredients"/>
+</form>

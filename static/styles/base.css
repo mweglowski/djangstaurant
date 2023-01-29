@@ -12,6 +12,7 @@ button {
 }
 a {
 	text-decoration: none;
+	color: black;
 }
 
 .content {
@@ -72,6 +73,66 @@ section {
 	cursor: pointer;
 }
 
-.invisible {
-	display: none;
+input[type="text"], input[type="number"], textarea {
+	width: 100%;
+	padding: .5em;
+	box-shadow: 0 0 .5em rgb(174, 174, 174);
+	border-radius: 5px;
+	border: none;
+	border-bottom: 2px solid transparent;
+	font-size: 1.1em;
+	transition: .3s;
+}
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+	box-shadow: 0 0 .3em #ff5050;
+	border-bottom: 2px solid #ff5050ca;
+	outline: none;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 500px;
+	width: 100%;
+	margin: auto;
+	padding: 2em;
+}
+
+.form-input-group {
+	width: 80%;
+	margin: auto;
+	padding: 1em;
+}
+.form-input-group label:first-child {
+	color: rgb(47, 47, 47);
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+.form input[type="radio"], .form label {
+	cursor: pointer;
+}
+
+.form-radio-box {
+	display: flex;
+	align-items: center;
+	padding: .3em;
+	gap: .5em;
+}
+
+input[type="radio"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  width: 1.15em;
+  height: 1.15em;
+	box-shadow: 0 0 .4em rgb(71, 71, 71);
+  border-radius: 50%;
+	transition: .4s;
+}
+
+input[type="radio"]:checked {
+	background-color: #ff5050;
+	box-shadow: 0 0 .4em #ff5050;
 }

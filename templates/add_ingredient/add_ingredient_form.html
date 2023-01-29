@@ -9,30 +9,30 @@
 />
 {% endblock %}
 
-<form class="ingredient-create-form" action="" method="POST">
+<form class="form" action="" method="POST">
   {% csrf_token %}
-  <div class="ingredient-create-form-input-group">
+  <div class="form-input-group">
     <label for="name">Name</label>
     <input type="text" id="name" name="name" maxlength="100" required />
   </div>
 
-  <div class="ingredient-create-form-input-group">
+  <div class="form-input-group">
     <label class="f">Unit</label>
-    <div class="add-ingredient-form-radio-box">
+    <div class="form-radio-box">
       <input type="radio" id="ml" name="unit" max="10" value="ml" />
       <label for="ml">ml</label>
     </div>
-    <div class="add-ingredient-form-radio-box">
+    <div class="form-radio-box">
       <input type="radio" id="g" name="unit" max="10" value="g" />
       <label for="g">g</label>
     </div>
-    <div class="add-ingredient-form-radio-box">
+    <div class="form-radio-box">
       <input type="radio" id="piece" name="unit" max="10" value="piece" />
       <label for="piece">piece</label>
     </div>
   </div>
 
-  <div class="ingredient-create-form-input-group">
+  <div class="form-input-group">
     <label for="amount">Amount</label>
     <input type="number" id="amount" name="amount" step="1" required />
   </div>

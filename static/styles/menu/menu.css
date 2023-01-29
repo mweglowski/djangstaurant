@@ -1,3 +1,24 @@
+.menu-section {
+	position: relative;
+}
+
+.new-menu-item-btn {
+	position: absolute;
+	right: 4em;
+	top: 6.85em;
+	padding: .7em 1.7em;
+	box-shadow: 0 0 .3em rgba(0, 0, 0, 0.769);
+	border: 2px solid rgba(0, 0, 0, 0.769);
+	border-radius: 8px 8px 0 0;
+	border-bottom: none;
+	font-weight: bold;
+	transition: .3s;
+}
+.new-menu-item-btn:hover {
+	background-color: rgba(0, 0, 0, 0.769);
+	color: white;
+}
+
 .menu-item-list {
 	display: flex;
 	flex-direction: column;

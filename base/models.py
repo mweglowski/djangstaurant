@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 
 class Ingredient(models.Model):
 	id = models.IntegerField(primary_key=True)
@@ -43,7 +43,7 @@ class MenuItemRequirement(models.Model):
 class Purchase(models.Model):
 	id = models.IntegerField(primary_key=True)
 	menu_item_id = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-	date = models.DateField()
+	date = models.DateField(default=datetime.date.today())
 
 	def __str__(self):
 		return f"Purchase: {self.date}"
