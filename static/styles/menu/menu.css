@@ -7,7 +7,7 @@
 .menu-item {
 	position: relative;
 	width: 90%;
-	box-shadow: 0 0 .3em gray;
+	box-shadow: 0 0 .5em rgb(198, 198, 198);
 	border-radius: 8px;
 	padding: 1em;
 	margin: .5em auto;
