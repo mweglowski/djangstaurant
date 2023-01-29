@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load static %} 
+
+{% block content %} 
+<section class="new-purchase-section">
+	<h1 class="section-title">NEW PURCHASE</h1>
+	<hr />
+
+	{% include "purchases/new_purchase_form.html" %}
+</section>
+{% endblock %} 

@@ -1,0 +1,35 @@
+{% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'styles/purchases/new_purchase_form.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'styles/base.css' %}"
+/>
+{% endblock %}
+
+<form class="new-purchase-form" action="" method="POST">
+  {% csrf_token %}
+
+  <div class="new-purchase-form-desc-box">
+    <div class="new-purchase-form-desc-title">Name:</div>
+    <div class="purchase-item-name" name="name">{{ item.name }}</div>
+  </div>
+  <div class="new-purchase-form-desc-box">
+    <div class="new-purchase-form-desc-title">Food type:</div>
+    <div class="purchase-item-ingredients">{{ item.food_type|title }}</div>
+  </div>
+
+  <div class="new-purchase-form-desc-box">
+    <div class="new-purchase-form-desc-title">Ingredients:</div>
+  </div>
+  <div class="new-purchase-form-desc-box">
+    <div class="new-purchase-form-desc-title">Price:</div>
+    <div class="purchase-item-price">{{ item.price }}$</div>
+  </div>
+
+  <input type="hidden" value="{{ item.id }}" name="id">
+  
+  <input class="button new-purchase-form-submit-btn" type="submit" value="Purchase for {{item.price}}$" />
+</form>

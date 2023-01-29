@@ -44,27 +44,6 @@
 	cursor: pointer;
 }
 
-.ingredient-create-form input[type="submit"] {
-	width: fit-content;
-	padding: .6em 3em;
-	margin: 2em auto;
-	background-color: #ff5050;
-	box-shadow: 0 0 .7em #ff5050;
-	border: 2px solid transparent;
-	color: white;
-	border-radius: 8px;
-	font-weight: bold;
-	font-size: 1em;
-	transition: .3s;
-}
-
-.ingredient-create-form input[type="submit"]:hover {
-	background-color: transparent;
-	border: 2px solid #ff5050;
-	color: #ff5050;
-	cursor: pointer;
-}
-
 .add-ingredient-form-radio-box {
 	display: flex;
 	align-items: center;

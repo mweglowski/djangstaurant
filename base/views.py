@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView
-from .forms import IngredientAddForm
-from .models import Ingredient, MenuItem
+from .forms import IngredientAddForm, NewPurchaseForm
+from .models import Ingredient, MenuItem, MenuItemRequirement
 
 # /home
 class HomeView(TemplateView):
@@ -54,3 +54,36 @@ class IngredientAddView(CreateView):
 	template_name = "add_ingredient/add_ingredient.html"
 
 
+# /new-purchase
+def new_purchase(request, menu_item_id):
+	menu_item_id = int(menu_item_id)
+	item = MenuItem.objects.all()[menu_item_id - 1]
+	context = {}
+	context["item"] = item
+
+	if request.method == "POST":
+		form = NewPurchaseForm(request.POST)
+		print("PURCHASED MENU ITEM ID -->", form["id"].value())
+
+		# SUBTRACTING AMOUNTS OF SPECIFIC INGREDIENTS
+		menu_item_id = int(form["id"].value())
+
+		required_ingredient_amount = MenuItemRequirement.objects.get(menu_item_id=menu_item_id).ingredient_amount
+
+		ingredient_name = MenuItemRequirement.objects.get(menu_item_id=menu_item_id).ingredient_id
+		
+		ingredient_in_storage = Ingredient.objects.get(name=ingredient_name)
+
+		print(ingredient_in_storage.amount)
+
+		ingredient_in_storage.amount -= required_ingredient_amount
+
+		print(ingredient_in_storage.amount)
+		
+		ingredient_in_storage.save()
+
+		return redirect('menu')
+
+	
+
+	return render(request, "purchases/new_purchase.html", context)

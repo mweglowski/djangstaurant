@@ -50,3 +50,28 @@ section {
 	max-width: 1000px;
 	margin: auto;
 }
+
+.button {
+	width: fit-content;
+	padding: .6em 3em;
+	margin: 2em auto 0 auto;
+	background-color: #ff5050;
+	box-shadow: 0 0 .7em #ff5050;
+	border: 2px solid transparent;
+	color: white;
+	border-radius: 8px;
+	font-weight: bold;
+	font-size: 1em;
+	transition: .3s;
+}
+
+.button:hover {
+	background-color: transparent;
+	border: 2px solid #ff5050;
+	color: #ff5050;
+	cursor: pointer;
+}
+
+.invisible {
+	display: none;
+}

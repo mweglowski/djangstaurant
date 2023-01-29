@@ -3,6 +3,10 @@
   rel="stylesheet"
   href="{% static 'styles/add_ingredient/add_ingredient_form.css' %}"
 />
+<link
+  rel="stylesheet"
+  href="{% static 'styles/base.css' %}"
+/>
 {% endblock %}
 
 <form class="ingredient-create-form" action="" method="POST">
@@ -33,5 +37,5 @@
     <input type="number" id="amount" name="amount" step="1" required />
   </div>
 
-  <input type="submit" />
+  <input class="button" type="submit" />
 </form>

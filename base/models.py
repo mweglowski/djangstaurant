@@ -37,4 +37,13 @@ class MenuItemRequirement(models.Model):
 		return "/menu"
 
 	def __str__(self):
-		return f"menu item requirement: {self.id}"
+		return f"MenuItemRequirement: {self.id}"
+
+
+class Purchase(models.Model):
+	id = models.IntegerField(primary_key=True)
+	menu_item_id = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+	date = models.DateField()
+
+	def __str__(self):
+		return f"Purchase: {self.date}"
