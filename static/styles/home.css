@@ -1,4 +1,18 @@
+.welcome-screen {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 700px;
+	overflow: hidden;
+}
+
 .title {
 	margin: 1rem auto;
 	font-size: 5em;
+	z-index: 1;
+}
+
+.welcome-screen hr {
+	z-index: 1;
+	border-color: white;
 }

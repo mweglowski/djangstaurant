@@ -4,17 +4,6 @@
 	padding: 4em;
 }
 
-.inventory-section-title {
-	margin: .1em;
-	font-size: 4em;
-}
-
-hr {
-	border: 1px solid rgba(0, 0, 0, 0.769);
-	box-shadow: 0 0 .1em black;
-	border-radius: 10px;
-}
-
 .add-ingredient-button {
 	padding: .6em 1.6em;
 	margin: auto;

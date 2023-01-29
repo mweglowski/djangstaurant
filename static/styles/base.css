@@ -17,8 +17,6 @@ a {
 .content {
 	display: flex;
 	flex-direction: column;
-	max-width: 1000px;
-	margin: auto;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -33,4 +31,22 @@ a {
 
 ::-webkit-scrollbar {
   width: 10px;
+}
+
+hr {
+	border: 1px solid rgba(0, 0, 0, 0.769);
+	box-shadow: 0 0 .1em black;
+	border-radius: 10px;
+}
+
+.section-title {
+	margin: .1em;
+	font-size: 4em;
+}
+
+section {
+	padding: 4em;
+	width: 100%;
+	max-width: 1000px;
+	margin: auto;
 }

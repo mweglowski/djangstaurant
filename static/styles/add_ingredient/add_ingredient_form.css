@@ -5,6 +5,12 @@
 	max-width: 500px;
 	width: 100%;
 	margin: auto;
+	padding: 2em;
+}
+
+.new-ingredient-section-title {
+	margin: .1em;
+	font-size: 4em;
 }
 
 .ingredient-create-form-input-group {
@@ -15,7 +21,7 @@
 .ingredient-create-form-input-group label:first-child {
 	color: rgb(47, 47, 47);
 	font-weight: bold;
-	font-size: 1.3em;
+	font-size: 1.4em;
 }
 
 .ingredient-create-form input[type="text"], .ingredient-create-form input[type="number"] {
@@ -57,4 +63,27 @@
 	border: 2px solid #ff5050;
 	color: #ff5050;
 	cursor: pointer;
+}
+
+.add-ingredient-form-radio-box {
+	display: flex;
+	align-items: center;
+	padding: .3em;
+	gap: .5em;
+}
+
+input[type="radio"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  width: 1.15em;
+  height: 1.15em;
+	box-shadow: 0 0 .4em rgb(71, 71, 71);
+  border-radius: 50%;
+	transition: .4s;
+}
+
+input[type="radio"]:checked {
+	background-color: #ff5050;
+	box-shadow: 0 0 .4em #ff5050;
 }

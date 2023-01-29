@@ -7,13 +7,13 @@
 
 {% block content %} 
 <section class="inventory">
-	<h1 class="inventory-section-title">INVENTORY</h1>
+	<h1 class="section-title">INVENTORY</h1>
 	
 	<hr>
 
 	{% include "ingredient_list.html" %}
 	
-	<a href="{% url 'ingredientcreate' %}" class="add-ingredient-button">Add New Ingredient</a>
+	<a href="{% url 'ingredientadd' %}" class="add-ingredient-button">Add New Ingredient</a>
 
 </section>
 {% endblock %}
