@@ -55,17 +55,8 @@
 	position: absolute;
 	right: .5em;
 	bottom: .5em;
-	padding: .4em 1em;
-	background-color: transparent;
-	border: 2px solid transparent;
-	border-radius: 5px;
 	font-size: .9em;
-	font-weight: bold;
-	color: #ff5050;
-	transition: .4s;
 }
 .menu-item-purchase-btn:hover {
-	border: 2px solid #ff5050;
 	transform: translateY(-5px);
-	cursor: pointer;
 }

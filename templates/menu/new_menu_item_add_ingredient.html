@@ -1,14 +1,66 @@
-{% extends "base.html" %}
-{% load static %} 
-
-{% block content %} 
+{% extends "base.html" %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'styles/menu/new_menu_item_add_ingredient.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'styles/menu/new_menu_item_add_ingredient_form.css' %}">
+{% endblock %} {% block content %}
 <section class="new-menu-item-add-ingredient">
-	<h1 class="section-title">ADD REQUIREMENT</h1>
-	<hr />
+  <h1 class="section-title">ADD REQUIREMENT</h1>
+  <hr />
 
-	<h3>CURRENT ITEM DETAILS</h3>
+  <div class="new-menu-item-add-ingredient-main-content">
+    <div class="new-menu-item-details">
+      <div class="new-menu-item-details-title">NEW ITEM DETAILS</div>
 
-	<h4>ADD INGREDIENT FORM</h4>
-	<h2>{{ item_id }}</h2>
+      <div class="new-menu-item-detail">
+        <div>Name:</div>
+        <div>Blue Lagoon</div>
+      </div>
+
+      <div class="new-menu-item-detail">
+        <div>Price:</div>
+        <div>14.99$</div>
+      </div>
+
+      <div class="new-menu-item-control-btns">
+        <a class="btn btn-transparent-black add-ing-cancel-btn" href="{% url 'menu' %}">Cancel</a>
+        <a class="btn btn-transparent-red add-ing-save-btn" href="{% url 'menu' %}">Save Item</a>
+      </div>
+    </div>
+
+    <form class="form" action="" method="POST">
+      {% csrf_token %}
+      <div class="form-input-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" maxlength="100" required />
+      </div>
+    
+      <div class="form-input-group">
+        <label class="f">Unit</label>
+        <div class="form-radio-box">
+          <input type="radio" id="ml" name="unit" max="10" value="ml" />
+          <label for="ml">ml</label>
+        </div>
+        <div class="form-radio-box">
+          <input type="radio" id="g" name="unit" max="10" value="g" />
+          <label for="g">g</label>
+        </div>
+        <div class="form-radio-box">
+          <input type="radio" id="piece" name="unit" max="10" value="piece" />
+          <label for="piece">piece</label>
+        </div>
+      </div>
+    
+      <div class="form-input-group">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" step="1" required />
+      </div>
+    
+      
+      <input class="btn btn-red new-menu-item-next-ing-btn" type="submit" value="Add Next Ingredient ➡"/>
+    </form>
+    <!-- {% include "menu/new_menu_item_add_ingredient_form.html" %} -->
+  </div>
 </section>
-{% endblock %} 
+{% endblock %}

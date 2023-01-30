@@ -7,17 +7,4 @@
 .add-ingredient-button {
 	padding: .6em 1.6em;
 	margin: auto;
-	border: 2px solid rgb(255, 80, 80);
-	border-radius: 8px;
-	color: rgb(255, 80, 80);
-	font-size: 1em;
-	font-weight: bold;
-	text-align: center;
-	transition: .3s;
-}
-.add-ingredient-button:hover {
-	background-color: rgb(255, 80, 80);
-	box-shadow: 0 0 .3em rgb(255, 80, 80);
-	color: white;
-	cursor: pointer;
 }

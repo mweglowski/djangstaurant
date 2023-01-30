@@ -1,0 +1,51 @@
+.new-menu-item-add-ingredient-main-content {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.new-menu-item-details {
+	position: relative;
+	width: 80%;
+	max-width: 400px;
+	height: fit-content;
+	margin: 3em auto;
+	padding: 4em 1.5em 0 1.5em;
+	box-shadow: 0 0 .5em #C5C5C5;
+	border-radius: 10px;
+}
+
+.new-menu-item-details-title {
+	position: absolute;
+	top:  0;
+	left: 0;
+	padding: .6em 2em;
+	box-shadow: 0 0 .5em #5a5a5a;
+	border-radius: 10px 0 10px 0;
+	font-weight: bold;
+}
+
+.new-menu-item-detail {
+	display: flex;
+	justify-content: space-between;
+	padding: 1em;
+	margin: .5em 0;
+	box-shadow: 0 0 .5em #b2b2b2;
+	border-radius: 10px;
+	font-size: 1.1em;
+}
+
+.new-menu-item-detail div:first-child {
+	font-weight: bold;
+}
+
+.new-menu-item-control-btns {
+	display: flex;
+	justify-content: space-between;
+}
+.add-ing-cancel-btn, .add-ing-save-btn {
+	padding: .5em 1.5em;
+	margin: 1em 0;
+}
+.add-ing-cancel-btn:hover, .add-ing-save-btn:hover {
+	transform: translateY(-5px);
+}

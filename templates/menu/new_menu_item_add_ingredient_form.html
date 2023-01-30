@@ -1,14 +1,10 @@
-{% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'styles/add_ingredient/add_ingredient_form.css' %}"
-/>
-<link
-  rel="stylesheet"
-  href="{% static 'styles/base.css' %}"
-/>
+{% load static %}
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'styles/menu/new_menu_item_add_ingredient_form.css' %}">
 {% endblock %}
 
+{% block content %}
 <form class="form" action="" method="POST">
   {% csrf_token %}
   <div class="form-input-group">
@@ -37,5 +33,7 @@
     <input type="number" id="amount" name="amount" step="1" required />
   </div>
 
-  <input class="btn btn-red add-ingredient-form-btn" type="submit" />
+	
+  <input class="btn btn-red new-menu-item-next-ing-btn" type="submit" value="Add Next Ingredient ➡"/>
 </form>
+{% endblock %}

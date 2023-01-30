@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from .forms import IngredientAddForm, NewPurchaseForm, MenuItemAddForm
+from .forms import IngredientAddForm, NewPurchaseForm, MenuItemAddForm, MenuItemRequirementAddForm
 from .models import Ingredient, MenuItem, MenuItemRequirement, Purchase
 
 # /home
@@ -33,15 +33,51 @@ def new_menu_item(request):
 		menu_item = MenuItem(name=name, price=price, food_type=food_type)
 		menu_item.save()
 		
-		return redirect(f"/menu/new-item/add-ingredient", {"item_id": menu_item.id})
+		# STORE MENU ITEM NAME IN SESSION
+		request.session['new-menu-item-name'] = name
+		request.session['new-menu-item-price'] = price
+
+		return redirect(f"/menu/new-item/add-ingredient")
 
 	return render(request, "menu/new_menu_item.html")
 
 
 # /menu/new-item/add-ingredient
 def new_menu_item_add_ingredient(request):
-	# CHECKING REQUEST METHOD AS USUAL
-	
+	# GET NEW MENU ITEM NAME AND PRICE FROM SESSION STORAGE
+	new_menu_item_name = request.session['new-menu-item-name']
+	new_menu_item_price = request.session['new-menu-item-price']
+
+	if request.method == "POST":
+		form = request.POST
+
+		# GET INGREDIENT NAME
+		ing_name = form.get("name")
+
+		# GET INGREDIENT UNIT
+		ing_unit = form.get("unit")
+
+		# GET REQUIRED INGREDIENT AMOUNT
+		ing_amount = form.get("amount")
+
+		# GET MENU ITEM
+		menu_item = MenuItem.objects.filter(name=new_menu_item_name).first()
+
+		# GET INGREDIENT AND IF INGREDIENT DOES NOT EXIST CREATE ONE WITH AMOUNT OF 0
+		if not Ingredient.objects.filter(name=ing_name).exists():
+			# CREATE
+			Ingredient.objects.create(name=ing_name, unit=ing_unit)
+			ingredient = Ingredient.objects.filter(name=ing_name).first()
+			ingredient.save()
+
+			new_requirement = MenuItemRequirement(menu_item_id=menu_item, ingredient_id=ingredient, ingredient_amount=ing_amount)
+			new_requirement.save()
+		else:
+			# GET INGREDIENT
+			ingredient = Ingredient.objects.get(name=ing_name)
+
+			new_requirement = MenuItemRequirement(menu_item_id=menu_item, ingredient_id=ingredient, ingredient_amount=ing_amount)
+			new_requirement.save()
 
 	return render(request, "menu/new_menu_item_add_ingredient.html")
 

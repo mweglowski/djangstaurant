@@ -17,7 +17,7 @@
 				<div class="menu-item-name">{{ menu_item.name }}</div>
 				<div class="menu-item-ingredient-list">ingredients list</div>
 				<div class="menu-item-price">{{ menu_item.price }}$</div>
-				<a class="menu-item-purchase-btn" href="{% url 'newpurchase' menu_item.id %}">PURCHASE</a>
+				<a class="btn btn-transparent-red menu-item-purchase-btn" href="{% url 'newpurchase' menu_item.id %}">PURCHASE</a>
 			</div>
 		{% endfor %}
 	</div>

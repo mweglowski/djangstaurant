@@ -6,10 +6,90 @@
 	box-sizing: border-box;
 	font-family: "Work Sans", sans-serif;
 }
-button {
+
+/* BUTTONS */
+.btn {
 	border-radius: 8px;
+	width: fit-content;
+	padding: .6em 3em;
+	font-weight: bold;
+	font-size: 1em;
+	transition: .3s;
 	cursor: pointer;
 }
+
+.btn-transparent-red {
+	padding: .4em 1em;
+	background-color: transparent;
+	border: 2px solid transparent;
+	color: #ff5050;
+}
+.btn-transparent-red:hover {
+	border: 2px solid #ff5050;
+}
+
+.btn-transparent-black {
+	padding: .4em 1em;
+	background-color: transparent;
+	border: 2px solid transparent;
+	color: #464646;
+}
+
+.btn-transparent-black:hover {
+	border: 2px solid #464646;
+}
+
+.btn-red {
+	background-color: #ff5050;
+	box-shadow: 0 0 .7em #ff5050;
+	border: 2px solid transparent;
+	color: white;
+	border-radius: 8px;
+}
+
+.btn-red:hover {
+	background-color: transparent;
+	border: 2px solid #ff5050;
+	color: #ff5050;
+}
+
+.btn-black {
+	background-color: #464646;
+	box-shadow: 0 0 .3em #464646;
+	border: 2px solid #464646;
+	color: white;
+}
+.btn-black:hover {
+	background-color: transparent;
+	box-shadow: none;
+	border: 2px solid #464646;
+	color: #464646;
+}
+.btn-border-black {
+	background-color: transparent;
+	box-shadow: none;
+	border: 2px solid #464646;
+	color: #464646;
+}
+.btn-border-black:hover {
+	background-color: #464646;
+	box-shadow: 0 0 .3em #464646;
+	border: 2px solid #464646;
+	color: white;
+}
+.btn-border-red {
+	background-color: transparent;
+	box-shadow: none;
+	border: 2px solid #ff5050;
+	color: #ff5050;
+}
+.btn-border-red:hover {
+	background-color: #ff5050;
+	box-shadow: 0 0 .3em #ff5050;
+	border: 2px solid #ff5050;
+	color: white;
+}
+
 a {
 	text-decoration: none;
 	color: black;
@@ -52,26 +132,6 @@ section {
 	margin: auto;
 }
 
-.button {
-	width: fit-content;
-	padding: .6em 3em;
-	margin: 2em auto 0 auto;
-	background-color: #ff5050;
-	box-shadow: 0 0 .7em #ff5050;
-	border: 2px solid transparent;
-	color: white;
-	border-radius: 8px;
-	font-weight: bold;
-	font-size: 1em;
-	transition: .3s;
-}
-
-.button:hover {
-	background-color: transparent;
-	border: 2px solid #ff5050;
-	color: #ff5050;
-	cursor: pointer;
-}
 
 input[type="text"], input[type="number"], textarea {
 	width: 100%;
