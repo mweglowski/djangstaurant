@@ -1,0 +1,9 @@
+.delete-ingredient-form {
+	margin-top: 3em;
+	max-width: 700px;
+	text-align: center;
+}
+
+.delete-ingredient-confirm-btn {
+	margin: 3em auto;
+}

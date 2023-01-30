@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %} 
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'styles/inventory/inventory.css' %}">
+{% endblock %} 
+
+{% block content %} 
+<section class="inventory">
+	<h1 class="section-title">INVENTORY</h1>
+	
+	<hr>
+
+	{% include "inventory/ingredient_list.html" %}
+	
+	<div class="inventory-control-btns">
+		<a href="{% url 'ingredientdelete' %}" class="btn btn-border-black delete-ingredient-btn">Delete Ingredient</a>
+		<a href="{% url 'ingredientadd' %}" class="btn btn-border-black add-ingredient-btn">Add New Ingredient</a>
+	</div>
+
+</section>
+{% endblock %}

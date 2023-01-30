@@ -1,0 +1,10 @@
+.inventory {
+	display: flex;
+	flex-direction: column;
+	padding: 4em;
+}
+
+.inventory-control-btns {
+	display: flex;
+	justify-content: space-evenly;
+}

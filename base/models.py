@@ -26,8 +26,8 @@ class MenuItem(models.Model):
 
 class MenuItemRequirement(models.Model):
 	id = models.IntegerField(primary_key=True)
-	menu_item_id = models.ForeignKey(MenuItem, on_delete=models.DO_NOTHING)
-	ingredient_id = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
+	menu_item_id = models.ForeignKey(MenuItem, on_delete=models.SET_NULL, null=True)
+	ingredient_id = models.ForeignKey(Ingredient, on_delete=models.SET_NULL, null=True)
 	ingredient_amount = models.FloatField(default=0.00)
 
 	def __str__(self):
@@ -36,7 +36,7 @@ class MenuItemRequirement(models.Model):
 
 class Purchase(models.Model):
 	id = models.IntegerField(primary_key=True)
-	menu_item_id = models.ForeignKey(MenuItem, on_delete=models.DO_NOTHING)
+	menu_item_id = models.ForeignKey(MenuItem, on_delete=models.SET_NULL, null=True)
 	date = models.DateField(default=datetime.date.today())
 
 	def __str__(self):

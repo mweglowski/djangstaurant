@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %} {% block head %}
+<link
+	rel="stylesheet"
+	href="{% static 'styles/base.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'styles/delete_ingredient/delete_ingredient_confirm.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+<section class="delete-ingredient-section">
+  <h1 class="section-title">DELETE INGREDIENT</h1>
+  <hr />
+
+	<form class="form delete-ingredient-form" action="" method="POST">
+		{% csrf_token %}
+	
+		<h1>Are you sure to delete this ingredient?</h1>
+	
+		<input class="btn btn-red delete-ingredient-confirm-btn" type="submit" value="Confirm"/>
+	</form>
+</section>
+{% endblock %}
+
+

@@ -48,6 +48,10 @@ def new_menu_item_add_ingredient(request):
 	new_menu_item_name = request.session['new-menu-item-name']
 	new_menu_item_price = request.session['new-menu-item-price']
 
+	context = {}
+	context["name"] = new_menu_item_name
+	context["price"] = new_menu_item_price
+
 	if request.method == "POST":
 		form = request.POST
 
@@ -79,7 +83,7 @@ def new_menu_item_add_ingredient(request):
 			new_requirement = MenuItemRequirement(menu_item_id=menu_item, ingredient_id=ingredient, ingredient_amount=ing_amount)
 			new_requirement.save()
 
-	return render(request, "menu/new_menu_item_add_ingredient.html")
+	return render(request, "menu/new_menu_item_add_ingredient.html", context)
 
 
 # /inventory
@@ -103,7 +107,7 @@ def inventory(request):
 
 	context = {}
 	context["ingredients"] = transformed_ings
-	return render(request, "inventory.html", context)
+	return render(request, "inventory/inventory.html", context)
 
 
 # /ingredient/add
@@ -112,7 +116,7 @@ def inventory(request):
 # 	form_class = IngredientAddForm 
 # 	template_name = "add_ingredient/add_ingredient.html"
 
-# /ingredient/add
+# /inventory/ingredient/add
 def ingredient_add_view(request):
 	if request.method == "POST":
 		form = IngredientAddForm(request.POST)
@@ -125,6 +129,42 @@ def ingredient_add_view(request):
 		return redirect('inventory')
 
 	return render(request, "add_ingredient/add_ingredient.html")
+
+# /inventory/ingredient/delete
+def ingredient_delete_view(request):
+	ingredients = Ingredient.objects.all()
+
+	# TRANSFORMING FROM FLOAT TO INT
+	transformed_ings = []
+	for ing in ingredients:
+		next_ing = {
+			"id": ing.id,
+			"name": ing.name,
+			"unit": ing.unit
+		}
+		if ing.amount > int(ing.amount):
+			next_ing["amount"] = ing.amount
+		else:
+			next_ing["amount"] = int(ing.amount)
+			
+		transformed_ings.append(next_ing)
+	print(transformed_ings)
+
+	context = {}
+	context["ingredients"] = transformed_ings
+
+	return render(request, "delete_ingredient/delete_ingredient.html", context)
+
+# /inventory/ingredient/delete/<id>
+def ingredient_delete_confirm_view(request, id):
+	if request.method == "POST":
+		# DELETE INGREDIENT
+		ing_to_delete = Ingredient.objects.get(id=id)
+		ing_to_delete.delete()
+
+		return redirect("/inventory/")
+
+	return render(request, "delete_ingredient/delete_ingredient_confirm.html")
 
 # /purchases
 def purchases_view(request):

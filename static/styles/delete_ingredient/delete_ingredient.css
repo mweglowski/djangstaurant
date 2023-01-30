@@ -1,0 +1,8 @@
+.ingredient-name {
+	margin-right: auto;
+}
+
+.delete-ingredient-btn {
+	margin: 0 -1em 0 1em;
+	font-size: .8em;
+}

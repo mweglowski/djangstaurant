@@ -1,4 +1,6 @@
 .ingredients-list {
+	display: flex;
+	flex-direction: column;
 	padding: .3em;
 	width: 80%;
 	max-width: 80%;
@@ -11,7 +13,8 @@
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	padding: 1em;
+	align-items: center;
+	padding: 1.5em;
 	margin-bottom: 10px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0 0 .3em rgb(205, 205, 205);
