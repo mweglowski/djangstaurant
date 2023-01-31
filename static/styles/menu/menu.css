@@ -2,9 +2,8 @@
 	position: relative;
 }
 
-.new-menu-item-btn {
+.menu-btn {
 	position: absolute;
-	right: 4em;
 	top: 6.85em;
 	padding: .7em 1.7em;
 	box-shadow: 0 0 .3em rgba(0, 0, 0, 0.769);
@@ -14,9 +13,17 @@
 	font-weight: bold;
 	transition: .3s;
 }
-.new-menu-item-btn:hover {
+.menu-btn:hover {
 	background-color: rgba(0, 0, 0, 0.769);
 	color: white;
+}
+
+.new-menu-item-btn {
+	right: 4em;
+}
+
+.delete-menu-item-btn {
+	right: 15em;
 }
 
 .menu-item-list {

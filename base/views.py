@@ -11,14 +11,29 @@ class HomeView(TemplateView):
 def menu(request):
 	menu_items = MenuItem.objects.all()
 	context = {}
-	context["menu_items"] = menu_items
-	# context["menu_items"] = []
-	# for item in menu_items:
-	# 	context["menu_items"].append({
-	# 		"id": item.id,
-	# 		"name": item.name,
-	# 		"price": item.price
-	# 	})
+	# context["menu_items"] = menu_items
+	context["menu_items"] = []
+	for item in menu_items:
+		# GET REQUIRED INGREDIENTS
+		item_requirements = MenuItemRequirement.objects.filter(menu_item_id=item)
+
+		ingredient_list_string = ""
+		if len(item_requirements) != 0:
+			for req in item_requirements:
+				if not req.ingredient_id:
+					break
+
+				ingredient = req.ingredient_id.name
+				ingredient_list_string += ingredient + ', '
+
+		ingredient_list_string = ingredient_list_string[:-2]
+
+		context["menu_items"].append({
+			"id": item.id,
+			"name": item.name,
+			"price": item.price,
+			"ingredient_list": ingredient_list_string,
+		})
 
 	return render(request, "menu/menu.html", context)
 
@@ -85,6 +100,54 @@ def new_menu_item_add_ingredient(request):
 
 	return render(request, "menu/new_menu_item_add_ingredient.html", context)
 
+# /menu/item/delete
+def menu_item_delete(request):
+	menu_items = MenuItem.objects.all()
+	context = {}
+	# context["menu_items"] = menu_items
+	context["menu_items"] = []
+	for item in menu_items:
+		# GET REQUIRED INGREDIENTS
+		item_requirements = MenuItemRequirement.objects.filter(menu_item_id=item)
+
+		ingredient_list_string = ""
+		if len(item_requirements) != 0:
+			for req in item_requirements:
+				if not req.ingredient_id:
+					break
+
+				ingredient = req.ingredient_id.name
+				ingredient_list_string += ingredient + ', '
+
+		ingredient_list_string = ingredient_list_string[:-2]
+
+		context["menu_items"].append({
+			"id": item.id,
+			"name": item.name,
+			"price": item.price,
+			"ingredient_list": ingredient_list_string,
+		})
+
+	return render(request, "menu/menu_item_delete.html", context)
+
+# /menu/item/delete/<id>
+def menu_item_delete_confirm(request, id):
+	if request.method == "POST":
+		# GET MENU ITEM VIA id
+		menu_item = MenuItem.objects.get(id=id)
+
+		# DELETE MENU ITEM REQUIREMENTS
+		requirements = MenuItemRequirement.objects.filter(menu_item_id=menu_item)
+		for req in requirements:
+			req.delete()
+
+		# DELETE MENU ITEM
+		menu_item.delete()
+
+		return redirect("/menu")
+
+	return render(request, "menu/menu_item_delete_confirm.html")
+
 
 # /inventory
 def inventory(request):
@@ -93,6 +156,9 @@ def inventory(request):
 	# TRANSFORMING FROM FLOAT TO INT
 	transformed_ings = []
 	for ing in ingredients:
+		if ing.amount == 0:
+			continue
+		
 		next_ing = {
 			"name": ing.name,
 			"unit": ing.unit
@@ -103,7 +169,6 @@ def inventory(request):
 			next_ing["amount"] = int(ing.amount)
 			
 		transformed_ings.append(next_ing)
-	print(transformed_ings)
 
 	context = {}
 	context["ingredients"] = transformed_ings
@@ -130,8 +195,8 @@ def ingredient_add_view(request):
 
 	return render(request, "add_ingredient/add_ingredient.html")
 
-# /inventory/ingredient/delete
-def ingredient_delete_view(request):
+# /inventory/ingredient/update
+def ingredient_update_view(request):
 	ingredients = Ingredient.objects.all()
 
 	# TRANSFORMING FROM FLOAT TO INT
@@ -148,7 +213,52 @@ def ingredient_delete_view(request):
 			next_ing["amount"] = int(ing.amount)
 			
 		transformed_ings.append(next_ing)
-	print(transformed_ings)
+
+	context = {}
+	context["ingredients"] = transformed_ings
+
+	return render(request, "update_ingredient/update_ingredient.html", context)
+
+# /inventory/ingredient/update/<id>
+def ingredient_update_form_view(request, id):
+	ing = Ingredient.objects.get(id=id)
+	context = {}
+	context["name"] = ing.name
+	context["amount"] = ing.amount
+	
+	if request.method == "POST":
+		# GET DATA FROM FORM AND UPDATE INGREDIENT
+		form = request.POST
+		new_amount = form.get("amount")
+		ing.amount = new_amount
+		ing.save()
+
+		return redirect("/inventory/")
+
+	return render(request, "update_ingredient/update_ingredient_form.html", context)
+
+
+# /inventory/ingredient/delete
+def ingredient_delete_view(request):
+	ingredients = Ingredient.objects.all()
+
+	# TRANSFORMING FROM FLOAT TO INT
+	transformed_ings = []
+	for ing in ingredients:
+		if ing.amount == 0:
+			continue
+
+		next_ing = {
+			"id": ing.id,
+			"name": ing.name,
+			"unit": ing.unit
+		}
+		if ing.amount > int(ing.amount):
+			next_ing["amount"] = ing.amount
+		else:
+			next_ing["amount"] = int(ing.amount)
+			
+		transformed_ings.append(next_ing)
 
 	context = {}
 	context["ingredients"] = transformed_ings
@@ -158,9 +268,10 @@ def ingredient_delete_view(request):
 # /inventory/ingredient/delete/<id>
 def ingredient_delete_confirm_view(request, id):
 	if request.method == "POST":
-		# DELETE INGREDIENT
+		# DELETE INGREDIENT (SET AMOUNT TO 0)
 		ing_to_delete = Ingredient.objects.get(id=id)
-		ing_to_delete.delete()
+		ing_to_delete.amount = 0.0
+		ing_to_delete.save()
 
 		return redirect("/inventory/")
 
@@ -170,22 +281,26 @@ def ingredient_delete_confirm_view(request, id):
 def purchases_view(request):
 	purchases = Purchase.objects.all()
 	purchases_transformed = []
-	for purchase in purchases:
-		# GET MENU ITEM 
-		menu_item = purchase.menu_item_id
-		# GET MENU ITEM NAME
-		menu_item_name = menu_item.name
-		# GET PRICE OF MENU ITEM
-		menu_item_price = menu_item.price
-		# GET DATE OF PURCHASE
-		menu_item_purchase_date = purchase.date
 
-		# APPEND NEW PURCHASE OBJECT TO TRANSFORMED PURCHASES
-		purchases_transformed.append({
-			"item_name": menu_item_name,
-			"price": menu_item_price,
-			"date": menu_item_purchase_date
-		})
+	for purchase in purchases:
+
+		# LOADING PURCHASE ONLY IF ITEM IS IN THE MENU AND HAS NOT BEEN DELETED
+		if purchase.menu_item_id:
+			# GET MENU ITEM 
+			menu_item = purchase.menu_item_id
+			# GET MENU ITEM NAME
+			menu_item_name = menu_item.name
+			# GET PRICE OF MENU ITEM
+			menu_item_price = menu_item.price
+			# GET DATE OF PURCHASE
+			menu_item_purchase_date = purchase.date
+
+			# APPEND NEW PURCHASE OBJECT TO TRANSFORMED PURCHASES
+			purchases_transformed.append({
+				"item_name": menu_item_name,
+				"price": menu_item_price,
+				"date": menu_item_purchase_date
+			})
 
 	return render(request, "purchases/purchases.html", {"purchases": purchases_transformed})
 
@@ -194,34 +309,34 @@ def purchases_view(request):
 def new_purchase(request, menu_item_id):
 	menu_item_id = int(menu_item_id)
 	item = MenuItem.objects.all()[menu_item_id - 1]
+
 	context = {}
 	context["item"] = item
 
 	if request.method == "POST":
 		form = NewPurchaseForm(request.POST)
-		print("PURCHASED MENU ITEM ID -->", form["id"].value())
 
 		# SUBTRACTING AMOUNTS OF SPECIFIC INGREDIENTS
 		menu_item_id = int(form["id"].value())
 
-		required_ingredient_amount = MenuItemRequirement.objects.get(menu_item_id=menu_item_id).ingredient_amount
+		requirements = MenuItemRequirement.objects.filter(menu_item_id=menu_item_id)
+		# FOR EVERY REQUIREMENT DECREASE THE AMOUNT OF SPECIFIC INGREDIENT
+		for req in requirements:
+			required_ingredient_amount = req.ingredient_amount
 
-		ingredient_name = MenuItemRequirement.objects.get(menu_item_id=menu_item_id).ingredient_id
-		
-		ingredient_in_storage = Ingredient.objects.get(name=ingredient_name)
+			ingredient_name = req.ingredient_id.name
+			print(ingredient_name)
 
-		print(ingredient_in_storage.amount)
+			ingredient_in_storage = Ingredient.objects.filter(name=ingredient_name)[0]
+			print(ingredient_in_storage)
 
-		ingredient_in_storage.amount -= required_ingredient_amount
-
-		print(ingredient_in_storage.amount)
-		
-		ingredient_in_storage.save()
+			ingredient_in_storage.amount -= required_ingredient_amount
+			
+			ingredient_in_storage.save()
 
 		# CREATING NEW PURCHASE
 		another_purchase = Purchase(menu_item_id=item)
 		another_purchase.save()
-		print(another_purchase)
 
 		return redirect('menu')
 

@@ -8,6 +8,10 @@
 }
 
 /* BUTTONS */
+.form-submit-btn {
+	margin: 2em auto;
+}
+
 .btn {
 	border-radius: 8px;
 	width: fit-content;

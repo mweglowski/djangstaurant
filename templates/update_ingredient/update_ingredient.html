@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% load static %} {% block head %}
+<link
+	rel="stylesheet"
+	href="{% static 'styles/inventory/ingredient_list.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'styles/delete_ingredient/delete_ingredient.css' %}"
+/>
+{% endblock %} {% block content %}
+<section class="update-ingredient-section">
+  <h1 class="section-title">UPDATE INGREDIENT</h1>
+  <hr />
+
+	<ul class="ingredients-list">
+		{% for ingredient in ingredients %} 
+			<li class="ingredient">
+	
+				<!-- BADGES BASED ON UNIT TYPE -->
+				{% if ingredient.unit == "ml" %} 
+					<div class="ingredient-badge ml-badge"></div>
+				{% elif ingredient.unit == "g" %}
+					<div class="ingredient-badge g-badge"></div>
+				{% else %}
+					<div class="ingredient-badge piece-badge"></div>
+				{% endif %}
+	
+				<div class="ingredient-name">{{ ingredient.name }}</div>
+
+				<div class="ingredient-amount">
+					{{ ingredient.amount }}
+					{% if ingredient.unit == "ml" %}
+					ml
+					{% elif ingredient.unit == "g" %} 
+					g
+					{% else %} 
+					pieces
+					{% endif %}
+				</div>
+
+				<a class="btn btn-transparent-red delete-ingredient-btn" href="{% url 'ingredient_update_form' ingredient.id %}">UPDATE</a>
+			</li>
+		{% endfor %}
+	</ul>
+</section>
+{% endblock %}
+

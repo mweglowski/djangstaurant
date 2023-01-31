@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'styles/base.css' %}"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'styles/menu/new_menu_item_add_ingredient.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+<section>
+  <h1 class="section-title">UPDATE INGREDIENT</h1>
+  <hr />
+
+  <form class="form" action="" method="POST">
+    {% csrf_token %}
+
+    <div class="new-menu-item-details">
+      <div class="new-menu-item-details-title">ITEM DETAILS</div>
+
+      <div class="new-menu-item-detail">
+        <div>Name:</div>
+        <div>{{ name }}</div>
+      </div>
+
+      <div class="new-menu-item-detail">
+        <div>Amount:</div>
+        <div>
+          {% if amount == 0 %}
+            Empty
+          {% else %} 
+            {{ amount }}
+          {% endif %}
+        </div>
+      </div>
+      <br />
+    </div>
+
+    <div class="form-input-group">
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" name="amount" step="1" required />
+    </div>
+
+    <input class="btn btn-red form-submit-btn" type="submit" value="Update Ingredient"/>
+  </form>
+</section>
+{% endblock %}

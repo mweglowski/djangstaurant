@@ -31,7 +31,7 @@ class MenuItemRequirement(models.Model):
 	ingredient_amount = models.FloatField(default=0.00)
 
 	def __str__(self):
-		return f"MenuItemRequirement: {self.id}"
+		return f"{self.menu_item_id} - {self.ingredient_id}"
 
 
 class Purchase(models.Model):
@@ -40,4 +40,4 @@ class Purchase(models.Model):
 	date = models.DateField(default=datetime.date.today())
 
 	def __str__(self):
-		return f"Purchase: {self.date}"
+		return f"{self.date}: {self.menu_item_id}"
