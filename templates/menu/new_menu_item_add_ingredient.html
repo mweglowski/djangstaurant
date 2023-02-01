@@ -10,25 +10,6 @@
   <hr />
 
   <div class="new-menu-item-add-ingredient-main-content">
-    <div class="new-menu-item-details">
-      <div class="new-menu-item-details-title">NEW ITEM DETAILS</div>
-
-      <div class="new-menu-item-detail">
-        <div>Name:</div>
-        <div>{{ name }}</div>
-      </div>
-
-      <div class="new-menu-item-detail">
-        <div>Price:</div>
-        <div>{{ price }}$</div>
-      </div>
-
-      <div class="new-menu-item-control-btns">
-        <a class="btn btn-transparent-black add-ing-cancel-btn" href="{% url 'menu' %}">Cancel</a>
-        <a class="btn btn-transparent-red add-ing-save-btn" href="{% url 'menu' %}">Save Item</a>
-      </div>
-    </div>
-
     <form class="form" action="" method="POST">
       {% csrf_token %}
       <div class="form-input-group">
@@ -60,7 +41,25 @@
       
       <input class="btn btn-red new-menu-item-next-ing-btn" type="submit" value="Add Next Ingredient ➡"/>
     </form>
-    <!-- {% include "menu/new_menu_item_add_ingredient_form.html" %} -->
+
+    <div class="new-menu-item-details">
+      <div class="new-menu-item-details-title">NEW ITEM DETAILS</div>
+
+      <div class="new-menu-item-detail">
+        <div>Name:</div>
+        <div>{{ name }}</div>
+      </div>
+
+      <div class="new-menu-item-detail">
+        <div>Price:</div>
+        <div>{{ price }}$</div>
+      </div>
+
+      <div class="new-menu-item-control-btns">
+        <a class="btn btn-transparent-black add-ing-cancel-btn" href="{% url 'menu' %}">Cancel</a>
+        <a class="btn btn-transparent-red add-ing-save-btn" href="{% url 'menu' %}">Save Item</a>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

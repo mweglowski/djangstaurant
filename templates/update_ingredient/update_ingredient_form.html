@@ -1,22 +1,75 @@
-{% extends "base.html" %}
-{% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'styles/base.css' %}"
-/>
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'styles/base.css' %}" />
 <link
   rel="stylesheet"
   href="{% static 'styles/menu/new_menu_item_add_ingredient.css' %}"
 />
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <section>
   <h1 class="section-title">UPDATE INGREDIENT</h1>
   <hr />
+  
+  <div class="new-menu-item-add-ingredient-main-content">
+    <form class="form" action="" method="POST">
+      {% csrf_token %}
 
-  <form class="form" action="" method="POST">
-    {% csrf_token %}
+      <div class="form-input-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" maxlength="100" value="{{ name }}" required />
+      </div>
+
+      <div class="form-input-group">
+        <label class="f">Unit</label>
+
+        {% if unit == "ml" %}
+          <div class="form-radio-box">
+            <input type="radio" id="ml" name="unit" max="10" value="ml" checked />
+            <label for="ml">ml</label>
+          </div>
+        {% else %}
+          <div class="form-radio-box">
+            <input type="radio" id="ml" name="unit" max="10" value="ml" />
+            <label for="ml">ml</label>
+          </div>
+        {% endif %}
+
+        {% if unit == "piece" %}
+        <div class="form-radio-box">
+          <input type="radio" id="piece" name="unit" max="10" value="g" checked />
+          <label for="g">g</label>
+        </div>
+        {% else %}
+          <div class="form-radio-box">
+            <input type="radio" id="piece" name="unit" max="10" value="g" />
+            <label for="g">g</label>
+          </div>
+        {% endif %}
+        
+        {% if unit == "g" %}
+          <div class="form-radio-box">
+            <input type="radio" id="piece" name="unit" max="10" value="piece" checked />
+            <label for="piece">piece</label>
+          </div>
+        {% else %}
+          <div class="form-radio-box">
+            <input type="radio" id="piece" name="unit" max="10" value="piece" />
+            <label for="piece">piece</label>
+          </div>
+        {% endif %}
+
+      </div>
+
+      <div class="form-input-group">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" step="0.01" value="{{ amount }}"required />
+      </div>
+
+      <input
+        class="btn btn-red form-submit-btn"
+        type="submit"
+        value="Update Ingredient"
+      />
+    </form>
 
     <div class="new-menu-item-details">
       <div class="new-menu-item-details-title">ITEM DETAILS</div>
@@ -27,24 +80,18 @@
       </div>
 
       <div class="new-menu-item-detail">
+        <div>Unit:</div>
+        <div>{{ unit }}</div>
+      </div>
+
+      <div class="new-menu-item-detail">
         <div>Amount:</div>
         <div>
-          {% if amount == 0 %}
-            Empty
-          {% else %} 
-            {{ amount }}
-          {% endif %}
+          {% if amount == 0 %} Empty {% else %} {{ amount }} {% endif %}
         </div>
       </div>
       <br />
     </div>
-
-    <div class="form-input-group">
-      <label for="amount">Amount</label>
-      <input type="number" id="amount" name="amount" step="1" required />
-    </div>
-
-    <input class="btn btn-red form-submit-btn" type="submit" value="Update Ingredient"/>
-  </form>
+  </div>
 </section>
 {% endblock %}

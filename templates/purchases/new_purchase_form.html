@@ -14,19 +14,20 @@
 
   <div class="new-purchase-form-desc-box">
     <div class="new-purchase-form-desc-title">Name:</div>
-    <div class="purchase-item-name" name="name">{{ item.name }}</div>
+    <div>{{ item.name }}</div>
   </div>
   <div class="new-purchase-form-desc-box">
     <div class="new-purchase-form-desc-title">Food type:</div>
-    <div class="purchase-item-ingredients">{{ item.food_type|title }}</div>
+    <div>{{ item.food_type|title }}</div>
   </div>
 
   <div class="new-purchase-form-desc-box">
     <div class="new-purchase-form-desc-title">Ingredients:</div>
+    <div>{{ ingredient_list }}</div>
   </div>
   <div class="new-purchase-form-desc-box">
     <div class="new-purchase-form-desc-title">Price:</div>
-    <div class="purchase-item-price">{{ item.price }}$</div>
+    <div>{{ item.price }}$</div>
   </div>
 
   <input type="hidden" value="{{ item.id }}" name="id">

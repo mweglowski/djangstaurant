@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views.generic import TemplateView
 from .forms import IngredientAddForm, NewPurchaseForm, MenuItemAddForm, MenuItemRequirementAddForm
 from .models import Ingredient, MenuItem, MenuItemRequirement, Purchase
+
+from .helper_functions import get_menu_item_ingredient_list
 
 # /home
 class HomeView(TemplateView):
@@ -15,18 +18,7 @@ def menu(request):
 	context["menu_items"] = []
 	for item in menu_items:
 		# GET REQUIRED INGREDIENTS
-		item_requirements = MenuItemRequirement.objects.filter(menu_item_id=item)
-
-		ingredient_list_string = ""
-		if len(item_requirements) != 0:
-			for req in item_requirements:
-				if not req.ingredient_id:
-					break
-
-				ingredient = req.ingredient_id.name
-				ingredient_list_string += ingredient + ', '
-
-		ingredient_list_string = ingredient_list_string[:-2]
+		ingredient_list_string = get_menu_item_ingredient_list(item)
 
 		context["menu_items"].append({
 			"id": item.id,
@@ -187,9 +179,15 @@ def ingredient_add_view(request):
 		form = IngredientAddForm(request.POST)
 		name = form["name"].value()
 		unit = form["unit"].value()
-		amount = form["amount"].value()
-		new_ingredient = Ingredient(name=name, unit=unit, amount=amount)
-		new_ingredient.save()
+		amount = float(form["amount"].value())
+
+		if Ingredient.objects.filter(name=name):
+			ing_in_storage = Ingredient.objects.get(name=name)
+			ing_in_storage.amount += amount
+			ing_in_storage.save()
+		else:
+			new_ingredient = Ingredient(name=name, unit=unit, amount=amount)
+			new_ingredient.save()
 
 		return redirect('inventory')
 
@@ -224,13 +222,17 @@ def ingredient_update_form_view(request, id):
 	ing = Ingredient.objects.get(id=id)
 	context = {}
 	context["name"] = ing.name
+	context["unit"] = ing.unit
 	context["amount"] = ing.amount
 	
 	if request.method == "POST":
 		# GET DATA FROM FORM AND UPDATE INGREDIENT
 		form = request.POST
-		new_amount = form.get("amount")
-		ing.amount = new_amount
+		messages.info(request, 'updating')
+
+		ing.name = form.get("name")
+		ing.unit = form.get("unit")
+		ing.amount = float(form.get("amount"))
 		ing.save()
 
 		return redirect("/inventory/")
@@ -312,6 +314,11 @@ def new_purchase(request, menu_item_id):
 
 	context = {}
 	context["item"] = item
+	# GET MENU ITEM INGREDIENT LIST
+	ingredient_list_string = get_menu_item_ingredient_list(item)
+	
+	# SAVE IT TO CONTEXT
+	context["ingredient_list"] = ingredient_list_string
 
 	if request.method == "POST":
 		form = NewPurchaseForm(request.POST)
